@@ -7,8 +7,9 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" type='text/css'>
 
 <style type="text/css">
-  .body {
+  body {
     background-color: var(--jp-layout-color0);
+    overflow-y: scroll;
   }
 
   .brand-logo {
@@ -18,9 +19,9 @@
 </style>
 
 {% for css in resources.inlining.css %}
-    <style type="text/css">
-    {{ css }}
-    </style>
+<style type="text/css">
+{{ css }}
+</style>
 {% endfor %}
 
 <style>
@@ -36,7 +37,7 @@ a.anchor-link {
 {%- endblock html_head_css -%}
 
 {%- block body -%}
-<body class="body" data-base-url="{{resources.base_url}}voila/">
+<body data-base-url="{{resources.base_url}}voila/">
   <header>
     <div class="navbar-fixed">
       <nav class="top-nav">
@@ -60,6 +61,9 @@ a.anchor-link {
       </div>
     </div>
   </main>
+
+  <!-- Load Materialize JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 {%- endblock body -%}
 
