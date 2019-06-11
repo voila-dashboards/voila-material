@@ -4,4 +4,4 @@ channels:
 dependencies:
   - ipywidgets=7.4.2
   - bqplot
-  - voila=0.0.13
+  - voila=0.1.2
