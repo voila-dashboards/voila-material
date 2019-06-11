@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <style type="text/css">
+      .brand-logo-container {
+        margin-top: 32px;
+        margin-bottom: 32px;
+      }
+
+      .brand-logo {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <meta http-equiv="refresh" content="1;url={{ open_url }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+  <body>
+    <header>
+      <div class="navbar-fixed">
+        <nav class="top-nav">
+          <div class="nav-wrapper grey lighten-5">
+            <!-- <ul class="right hide-on-med-and-down">
+              <li></li>
+              <li></li>
+            </ul> -->
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <p class="caption center-align">
+              This page should redirect you to voila. If it doesn't,
+              <a href="{{ open_url }}">click here to go to voila</a>
+            </p>
+
+            <div class="center-align">
+              <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-red-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Load Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>

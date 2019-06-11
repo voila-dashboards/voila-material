@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <style type="text/css">
+      .brand-logo-container {
+        margin-top: 32px;
+        margin-bottom: 32px;
+      }
+
+      .brand-logo {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+  <body>
+    <header>
+      <div class="navbar-fixed">
+        <nav class="top-nav">
+          <div class="nav-wrapper grey lighten-5">
+          </div>
+        </nav>
+      </div>
+
+      <ul class="sidenav sidenav-fixed grey lighten-5">
+        <li class=brand-logo-container>
+          <a href="#!">
+            <object class="brand-logo" type="image/svg+xml" data="{{base_url}}voila/static/voila.svg"></object>
+          </a>
+        </li>
+        <li><div class="divider"></div></li>
+
+        {% if breadcrumbs|length > 1: %}
+          <li><a href="{{breadcrumbs[-2][0]}}"><i class="material-icons">folder</i>..</a></li>
+        {% endif %}
+
+        {% for content in contents.content %}
+          {% if content.type == 'notebook' %}
+            <li class="bold"><a href="{{base_url}}voila/render/{{content.path}}"><i class="material-icons">book</i>{{content.name}}</a></li>
+          {% endif %}
+          {% if content.type == 'directory' %}
+            <li class="bold"><a href="{{base_url}}voila/tree/{{content.path}}"><i class="material-icons">folder</i>{{content.name}}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </header>
+
+    <!-- Load Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>
