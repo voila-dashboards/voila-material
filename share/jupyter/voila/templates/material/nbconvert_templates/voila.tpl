@@ -8,7 +8,7 @@
 {% else %}
 <link href="{{resources.base_url}}voila/static/theme-light.css" rel="stylesheet" type='text/css'>
 {% endif %}
-<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" type='text/css'>
+<link href="{{resources.base_url}}voila/static/materialize.min.css" rel="stylesheet" type='text/css'>
 
 <style type="text/css">
   body {
@@ -73,9 +73,12 @@ a.anchor-link {
       </div>
     </div>
   </main>
-
-  <!-- Load Materialize JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 {%- endblock body -%}
 
+{% block footer_js %}
+{{ super() }}
+
+<!-- Load Materialize JavaScript -->
+<script src="{{resources.base_url}}voila/static/materialize.min.js"></script>
+{% endblock footer_js %}
