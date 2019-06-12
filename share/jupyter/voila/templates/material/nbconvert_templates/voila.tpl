@@ -3,13 +3,21 @@
 
 {%- block html_head_css -%}
 <link href="{{resources.base_url}}voila/static/index.css" rel="stylesheet" type='text/css'>
+{% if resources.theme == 'dark' %}
+<link href="{{resources.base_url}}voila/static/theme-dark.css" rel="stylesheet" type='text/css'>
+{% else %}
 <link href="{{resources.base_url}}voila/static/theme-light.css" rel="stylesheet" type='text/css'>
+{% endif %}
 <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" type='text/css'>
 
 <style type="text/css">
   body {
     background-color: var(--jp-layout-color0);
     overflow-y: scroll;
+  }
+
+  .nav-wrapper {
+    background-color: var(--jp-layout-color1);
   }
 
   .brand-logo {
@@ -41,7 +49,7 @@ a.anchor-link {
   <header>
     <div class="navbar-fixed">
       <nav class="top-nav">
-        <div class="nav-wrapper grey lighten-5">
+        <div class="nav-wrapper">
           <a href="#!" class="brand-logo-container">
             <object class="brand-logo" type="image/svg+xml" data="{{resources.base_url}}voila/static/voila.svg"></object>
           </a>
@@ -54,7 +62,11 @@ a.anchor-link {
     <div class="container">
       <div class="row">
         <div class="col s12">
+          {% if resources.theme == 'dark' %}
+          <div class="jp-Notebook theme-dark">
+          {% else %}
           <div class="jp-Notebook theme-light">
+          {% endif %}
             {{ super() }}
           </div>
         </div>

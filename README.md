@@ -5,3 +5,8 @@
 Material design template example for voila
 
 ![screenshot](./voila-material.png)
+
+
+Theme support
+
+![screenshot](./voila-material-dark.png)
