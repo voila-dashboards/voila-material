@@ -77,7 +77,7 @@ class DevelopCmd(develop):
 # WARNING: all files generates during setup.py will not end up in the source distribution
 data_files = []
 # Add all the templates
-for (dirpath, dirnames, filenames) in os.walk('share/jupyter/voila/templates/'):
+for (dirpath, dirnames, filenames) in os.walk('share/jupyter/templates/voila/'):
     if filenames:
         data_files.append((dirpath, [os.path.join(dirpath, filename) for filename in filenames]))
 
