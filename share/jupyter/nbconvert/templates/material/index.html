@@ -1,0 +1,65 @@
+{%- extends 'lab/index.html' -%}
+
+
+{%- block html_head_css -%}
+{{ super() }}
+{{ resources.include_css("static/materialize.min.css") }}
+<style type="text/css">
+  body {
+    background-color: var(--jp-layout-color0);
+    overflow-y: scroll;
+  }
+
+  .nav-wrapper {
+    background-color: var(--jp-layout-color1);
+  }
+
+  .brand-logo {
+    height: 90%;
+    width: 100%;
+  }
+</style>
+{%- endblock html_head_css -%}
+
+
+
+{% block body_content %}
+  <header>
+    <div class="navbar-fixed">
+      <nav class="top-nav">
+        <div class="nav-wrapper">
+          <a href="#!" class="brand-logo-container">
+            <object class="brand-logo" type="image/svg+xml" data="{{resources.include_url('static/voila.svg')}}"></object>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          {% if resources.theme == 'dark' %}
+          <div class="jp-Notebook theme-dark">
+          {% else %}
+          <div class="jp-Notebook theme-light">
+          {% endif %}
+          {%- block body_cells -%}
+            {{ super() }}
+          {%- endblock body_cells -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{%- endblock body_content -%}
+
+
+
+{% block footer_js %}
+{{ super() }}
+
+<!-- Load Materialize JavaScript -->
+{{ resources.include_js("static/materialize.min.js") }}
+{% endblock footer_js %}

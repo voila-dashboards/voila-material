@@ -49,7 +49,7 @@ def user_dir():
 
 class DevelopCmd(develop):
     prefix_targets = [
-        ("voila/templates", 'material')
+        ("nbconvert/templates", 'material')
     ]
     def run(self):
         target_dir = os.path.join(sys.prefix, 'share', 'jupyter')
@@ -77,7 +77,7 @@ class DevelopCmd(develop):
 # WARNING: all files generates during setup.py will not end up in the source distribution
 data_files = []
 # Add all the templates
-for (dirpath, dirnames, filenames) in os.walk('share/jupyter/voila/templates/'):
+for (dirpath, dirnames, filenames) in os.walk('share/jupyter/nbconvert/templates/'):
     if filenames:
         data_files.append((dirpath, [os.path.join(dirpath, filename) for filename in filenames]))
 
