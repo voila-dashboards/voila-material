@@ -90,6 +90,7 @@ setup(
     include_package_data=True,
     author='Martin Renou',
     author_email='martin.renou@gmail.com',
+    install_requires=['voila>=0.1.12'],
     url='https://github.com/martinRenou/voila-material',
     keywords=[
         'ipython',
