@@ -42,6 +42,12 @@
       .nav-wrapper {
         background-color: #5cbcaf;
       }
+
+      .sidenav-link {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     </style>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -65,15 +71,15 @@
         <li><div class="divider"></div></li>
 
         {% if breadcrumbs|length > 1: %}
-          <li><a href="{{breadcrumbs[-2][0]}}"><i class="material-icons">folder</i>..</a></li>
+          <li><a class="sidenav-link" href="{{breadcrumbs[-2][0]}}"><i class="material-icons">folder</i>..</a></li>
         {% endif %}
 
         {% for content in contents.content %}
           {% if content.type == 'notebook' %}
-            <li class="bold"><a href="{{base_url}}voila/render/{{content.path}}"><i class="material-icons">book</i>{{content.name}}</a></li>
+            <li class="bold"><a class="sidenav-link" href="{{base_url}}voila/render/{{content.path}}"><i class="material-icons">book</i>{{content.name}}</a></li>
           {% endif %}
           {% if content.type == 'directory' %}
-            <li class="bold"><a href="{{base_url}}voila/tree/{{content.path}}"><i class="material-icons">folder</i>{{content.name}}</a></li>
+            <li class="bold"><a class="sidenav-link" href="{{base_url}}voila/tree/{{content.path}}"><i class="material-icons">folder</i>{{content.name}}</a></li>
           {% endif %}
         {% endfor %}
       </ul>
