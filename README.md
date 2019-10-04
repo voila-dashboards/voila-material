@@ -28,6 +28,6 @@ voila my_notebook.ipynb --template=material --theme=dark
 ![screenshot](./material_spinner.png)
 ![screenshot](./material_light.png)
 
-Dark support
+Dark theme support
 
 ![screenshot](./material_dark.png)
