@@ -1,6 +1,10 @@
 {%- extends 'base.tpl' -%}
 {% from 'mathjax.tpl' import mathjax %}
 
+{# this overrides the default behaviour of directly starting the kernel and executing the notebook #}
+{% block notebook_execute %}
+{% endblock notebook_execute %}
+
 {%- block html_head_css -%}
 <link href="{{resources.base_url}}voila/static/index.css" rel="stylesheet" type='text/css'>
 {% if resources.theme == 'dark' %}
@@ -17,12 +21,52 @@
   }
 
   .nav-wrapper {
-    background-color: var(--jp-layout-color1);
+    {% if resources.theme == 'dark' %}
+      background-color: #268380;
+    {% else %}
+      background-color: #5cbcaf;
+    {% endif %}
   }
 
   .brand-logo {
     height: 90%;
     width: 100%;
+  }
+
+  #loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 75vh;
+      color: var(--jp-content-font-color1);
+      font-family: sans-serif;
+  }
+
+  .spinner {
+    animation: rotation 2s infinite linear;
+    transform-origin: 50% 50%;
+  }
+
+  .spinner-container {
+    width: 10%;
+  }
+
+  @keyframes rotation {
+    from {transform: rotate(0deg);}
+    to   {transform: rotate(359deg);}
+  }
+
+  .voila-spinner-color1{
+    {% if resources.theme == 'dark' %}
+      fill: #268380;
+    {% else %}
+      fill: #5cbcaf;
+    {% endif %}
+  }
+
+  .voila-spinner-color2{
+    fill: #f8e14b;
   }
 </style>
 
@@ -45,13 +89,30 @@ a.anchor-link {
 {%- endblock html_head_css -%}
 
 {%- block body -%}
+{%- block body_header -%}
 <body data-base-url="{{resources.base_url}}voila/">
+  <div id="loading">
+    <div class="spinner-container">
+      <svg class="spinner" data-name="c1" version="1.1" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><metadata><rdf:RDF><cc:Work rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/><dc:title>voila</dc:title></cc:Work></rdf:RDF></metadata><title>spin</title><path class="voila-spinner-color1" d="m250 405c-85.47 0-155-69.53-155-155s69.53-155 155-155 155 69.53 155 155-69.53 155-155 155zm0-275.5a120.5 120.5 0 1 0 120.5 120.5 120.6 120.6 0 0 0-120.5-120.5z"/><path class="voila-spinner-color2" d="m250 405c-85.47 0-155-69.53-155-155a17.26 17.26 0 1 1 34.51 0 120.6 120.6 0 0 0 120.5 120.5 17.26 17.26 0 1 1 0 34.51z"/></svg>
+    </div>
+    <h2 id="loading_text">Running {{nb_title}}...</h2>
+  </div>
+<script>
+var voila_process = function(cell_index, cell_count) {
+  var el = document.getElementById("loading_text")
+  el.innerHTML = `Executing ${cell_index} of ${cell_count}`
+}
+</script>
+
+<div id="rendered_cells" style="display: none">
+{%- endblock body_header -%}
+
   <header>
     <div class="navbar-fixed">
       <nav class="top-nav">
         <div class="nav-wrapper">
           <a href="#!" class="brand-logo-container">
-            <object class="brand-logo" type="image/svg+xml" data="{{resources.base_url}}voila/static/voila.svg"></object>
+            <object class="brand-logo" type="image/svg+xml" data="{{resources.base_url}}voila/static/voila_logo.svg"></object>
           </a>
         </div>
       </nav>
@@ -67,18 +128,48 @@ a.anchor-link {
           {% else %}
           <div class="jp-Notebook theme-light">
           {% endif %}
-            {{ super() }}
+            {%- block body_loop -%}
+              {# from this point on, the kernel is started #}
+              {%- with kernel_id = kernel_start() -%}
+                <script id="jupyter-config-data" type="application/json">
+                {
+                    "baseUrl": "{{resources.base_url}}",
+                    "kernelId": "{{kernel_id}}"
+                }
+                </script>
+                {% set cell_count = nb.cells|length %}
+                {%- for cell in cell_generator(nb, kernel_id) -%}
+                  {% set cellloop = loop %}
+                  {%- block any_cell scoped -%}
+                  <script>
+                    voila_process({{ cellloop.index }}, {{ cell_count }})
+                  </script>
+                    {{ super() }}
+                  {%- endblock any_cell -%}
+                {%- endfor -%}
+              {% endwith %}
+            {%- endblock body_loop -%}
+            <div id="rendered_cells" style="display: none">
           </div>
         </div>
       </div>
     </div>
   </main>
+
+{%- block body_footer -%}
+  <script type="text/javascript">
+    (function() {
+      // remove the loading element
+      var el = document.getElementById("loading")
+      el.parentNode.removeChild(el)
+      // show the cell output
+      el = document.getElementById("rendered_cells")
+      el.style.display = 'unset'
+    })();
+  </script>
+
+  <script src="{{resources.base_url}}voila/static/materialize.min.js"></script>
 </body>
+{%- endblock body_footer -%}
+
 {%- endblock body -%}
-
-{% block footer_js %}
-{{ super() }}
-
-<!-- Load Materialize JavaScript -->
-<script src="{{resources.base_url}}voila/static/materialize.min.js"></script>
-{% endblock footer_js %}

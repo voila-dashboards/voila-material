@@ -24,9 +24,10 @@ voila my_notebook.ipynb --template=material --theme=dark
 
 ## Example
 
-![screenshot](./voila-material.png)
+![screenshot](./material_tree.png)
+![screenshot](./material_spinner.png)
+![screenshot](./material_light.png)
 
+Dark theme support
 
-Dark support
-
-![screenshot](./voila-material-dark.png)
+![screenshot](./material_dark.png)
