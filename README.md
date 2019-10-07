@@ -22,12 +22,13 @@ Or for the dark theme:
 voila my_notebook.ipynb --template=material --theme=dark
 ```
 
-## Example
+### Light theme
 
 ![screenshot](./material_tree.png)
 ![screenshot](./material_spinner.png)
 ![screenshot](./material_light.png)
 
-Dark theme support
+### Dark theme
 
+![screenshot](./material_dark_spinner.png)
 ![screenshot](./material_dark.png)

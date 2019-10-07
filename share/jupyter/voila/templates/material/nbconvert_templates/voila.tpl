@@ -8,8 +8,10 @@
 {%- block html_head_css -%}
 <link href="{{resources.base_url}}voila/static/index.css" rel="stylesheet" type='text/css'>
 {% if resources.theme == 'dark' %}
+{% set bar_color = '#555454' %}
 <link href="{{resources.base_url}}voila/static/theme-dark.css" rel="stylesheet" type='text/css'>
 {% else %}
+{% set bar_color = '#5cbcaf' %}
 <link href="{{resources.base_url}}voila/static/theme-light.css" rel="stylesheet" type='text/css'>
 {% endif %}
 <link href="{{resources.base_url}}voila/static/materialize.min.css" rel="stylesheet" type='text/css'>
@@ -21,11 +23,7 @@
   }
 
   .nav-wrapper {
-    {% if resources.theme == 'dark' %}
-      background-color: #268380;
-    {% else %}
-      background-color: #5cbcaf;
-    {% endif %}
+    background-color: {{ bar_color }};
   }
 
   .brand-logo {
@@ -58,11 +56,7 @@
   }
 
   .voila-spinner-color1{
-    {% if resources.theme == 'dark' %}
-      fill: #268380;
-    {% else %}
-      fill: #5cbcaf;
-    {% endif %}
+    fill: {{ bar_color }};
   }
 
   .voila-spinner-color2{
