@@ -1,91 +1,46 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="{{base_url}}voila/static/materialize.min.css">
+{% extends "base.html" %}
 
-    <style type="text/css">
-      @font-face {
-        font-family: 'Material Icons';
-        font-style: normal;
-        font-weight: 400;
-        src: url({{base_url}}voila/static/icons_font.ttf) format('truetype');
-      }
+{% block head %}
+<style type="text/css">
+  .voila-logo:hover {
+    background-color: transparent !important;
+  }
+</style>
+{% endblock %}
 
-      .material-icons {
-        font-family: 'Material Icons';
-        font-weight: normal;
-        font-style: normal;
-        font-size: 24px;
-        line-height: 1;
-        letter-spacing: normal;
-        text-transform: none;
-        display: inline-block;
-        white-space: nowrap;
-        word-wrap: normal;
-        direction: ltr;
-      }
+{% block body %}
+  <header>
+    <div class="navbar-fixed">
+      <nav class="top-nav">
+        <div class="nav-wrapper">
+        </div>
+      </nav>
+    </div>
 
-      .brand-logo-container {
-        margin-top: 32px;
-        margin-bottom: 32px;
-      }
+    <ul class="sidenav sidenav-fixed grey lighten-5">
+      <li class=brand-logo-container>
+        <a class="voila-logo">
+          <object class="brand-logo" type="image/svg+xml" data="{{base_url}}voila/static/voila_logo_bleu.svg"></object>
+        </a>
+      </li>
+      <li><div class="divider"></div></li>
 
-      .brand-logo {
-        height: 100%;
-        width: 100%;
-      }
+      {% if breadcrumbs|length > 1: %}
+        <li><a class="sidenav-link" href="{{breadcrumbs[-2][0]}}"><i class="material-icons">folder</i>..</a></li>
+      {% endif %}
 
-      .sidenav {
-        width: fit-content;
-      }
-
-      .nav-wrapper {
-        background-color: #5cbcaf;
-      }
-
-      .sidenav-link {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    </style>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  </head>
-
-  <body data-base-url="{{base_url}}voila/">
-    <header>
-      <div class="navbar-fixed">
-        <nav class="top-nav">
-          <div class="nav-wrapper">
-          </div>
-        </nav>
-      </div>
-
-      <ul class="sidenav sidenav-fixed grey lighten-5">
-        <li class=brand-logo-container>
-          <a href="#!">
-            <object class="brand-logo" type="image/svg+xml" data="{{base_url}}voila/static/voila_logo_bleu.svg"></object>
-          </a>
-        </li>
-        <li><div class="divider"></div></li>
-
-        {% if breadcrumbs|length > 1: %}
-          <li><a class="sidenav-link" href="{{breadcrumbs[-2][0]}}"><i class="material-icons">folder</i>..</a></li>
+      {% for content in contents.content %}
+        {% if content.type == 'notebook' %}
+          <li class="bold">
+            <a class="sidenav-link" href="{{base_url}}voila/render/{{content.path}}"><i class="material-icons">book</i>{{content.name}}</a>
+          </li>
         {% endif %}
-
-        {% for content in contents.content %}
-          {% if content.type == 'notebook' %}
-            <li class="bold"><a class="sidenav-link" href="{{base_url}}voila/render/{{content.path}}"><i class="material-icons">book</i>{{content.name}}</a></li>
-          {% endif %}
-          {% if content.type == 'directory' %}
-            <li class="bold"><a class="sidenav-link" href="{{base_url}}voila/tree/{{content.path}}"><i class="material-icons">folder</i>{{content.name}}</a></li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    </header>
-
-    <!-- Load Materialize JavaScript -->
-    <script src="{{base_url}}voila/static/materialize.min.js"></script>
-  </body>
-</html>
+        {% if content.type == 'directory' %}
+          <li class="bold">
+            <a class="sidenav-link" href="{{base_url}}voila/tree/{{content.path}}"><i class="material-icons">folder</i>{{content.name}}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </header>
+{% endblock %}

@@ -1,61 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="{{base_url}}voila/static/materialize.min.css">
+{% set base_url = open_url %}
 
-    <style type="text/css">
-      .brand-logo-container {
-        margin-top: 32px;
-        margin-bottom: 32px;
-      }
+{% extends "base.html" %}
 
-      .brand-logo {
-        height: 100%;
-        width: 100%;
-      }
-    </style>
+{% block head %}
+  <meta http-equiv="refresh" content="1;url={{ base_url }}" />
+{% endblock %}
 
-    <meta http-equiv="refresh" content="1;url={{ open_url }}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  </head>
-
-  <body>
-    <header>
-      <div class="navbar-fixed">
-        <nav class="top-nav">
-          <div class="nav-wrapper grey lighten-5"></div>
-        </nav>
-      </div>
-    </header>
-
-    <main>
-      <div class="container">
-        <div class="row">
-          <div class="col s12">
-            <p class="caption center-align">
-              This page should redirect you to voila. If it doesn't,
-              <a href="{{ open_url }}">click here to go to voila</a>
-            </p>
-
-            <div class="center-align">
-              <div class="preloader-wrapper big active">
-                <div class="spinner-layer spinner-red-only">
-                  <div class="circle-clipper left">
-                    <div class="circle"></div>
-                  </div><div class="gap-patch">
-                    <div class="circle"></div>
-                  </div><div class="circle-clipper right">
-                    <div class="circle"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <!-- Load Materialize JavaScript -->
-    <script src="{{base_url}}voila/static/materialize.min.js"></script>
-  </body>
-</html>
+{% block body %}
+  {% call spinner() %}
+    <h5>
+      This page should redirect you to voila. If it doesn't, <a href="{{ base_url }}">click here to go to voila</a>.
+    </h5>
+  {% endcall %}
+{% endblock %}
