@@ -1,7 +1,7 @@
 {%- extends 'base.tpl' -%}
 {% from 'mathjax.tpl' import mathjax %}
 
-{# this overrides the default behaviour of directly starting the kernel and executing the notebook #}
+{# this overrides the default behavior of directly starting the kernel and executing the notebook #}
 {% block notebook_execute %}
 {% endblock notebook_execute %}
 
@@ -62,6 +62,27 @@
   .voila-spinner-color2{
     fill: #f8e14b;
   }
+
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url({{resources.base_url}}voila/static/icons_font.ttf) format('truetype');
+  }
+
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+  }
 </style>
 
 {% for css in resources.inlining.css %}
@@ -106,8 +127,11 @@ var voila_process = function(cell_index, cell_count) {
       <nav class="top-nav">
         <div class="nav-wrapper">
           <a href="#!" class="brand-logo-container">
-            <object class="brand-logo" type="image/svg+xml" data="{{resources.base_url}}voila/static/voila_logo.svg"></object>
+            <object class="brand-logo" type="image/svg+xml" data="{{ resources.base_url }}voila/static/voila_logo.svg"></object>
           </a>
+          <ul class="right">
+            <li><a href="#"><i class="material-icons" id="kernel-status-icon">radio_button_unchecked</i></a></li>
+          </ul>
         </div>
       </nav>
     </div>
@@ -165,5 +189,28 @@ var voila_process = function(cell_index, cell_count) {
   <script src="{{resources.base_url}}voila/static/materialize.min.js"></script>
 </body>
 {%- endblock body_footer -%}
+
+{% block footer_js %}
+  {{ super() }}
+
+  <script type="text/javascript">
+    requirejs(['static/voila'], function(voila) {
+      (async function() {
+        var kernel = await voila.connectKernel();
+
+        kernel.statusChanged.connect(() => {
+          // console.log(kernel.status);
+          var el = document.getElementById("kernel-status-icon");
+
+          if (kernel.status == 'busy') {
+            el.innerHTML = 'radio_button_checked';
+          } else {
+            el.innerHTML = 'radio_button_unchecked';
+          }
+        });
+      })();
+    });
+  </script>
+{% endblock footer_js %}
 
 {%- endblock body -%}
