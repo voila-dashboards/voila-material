@@ -6,8 +6,16 @@ Material design template for voila
 
 ## Installation
 
+You can install it using pip:
+
 ```
 pip install voila-material
+```
+
+Or using conda:
+
+```
+conda install -c conda-forge voila-material
 ```
 
 ## Usage
