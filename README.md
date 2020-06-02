@@ -32,11 +32,11 @@ voila my_notebook.ipynb --template=material --theme=dark
 
 ### Light theme
 
-![screenshot](./material_tree.png)
-![screenshot](./material_spinner.png)
-![screenshot](./material_light.png)
+![screenshot](./images/material_tree.png)
+![screenshot](./images/material_spinner.png)
+![screenshot](./images/material_light.png)
 
 ### Dark theme
 
-![screenshot](./material_dark_spinner.png)
-![screenshot](./material_dark.png)
+![screenshot](./images/material_dark_spinner.png)
+![screenshot](./images/material_dark.png)
