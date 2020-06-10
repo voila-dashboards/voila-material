@@ -97,7 +97,7 @@ setup(
         'ipython',
         'jupyter',
         'widgets',
-        'voila'
+        'voila==0.2.0a1'
     ],
     cmdclass={
         'develop': DevelopCmd,
