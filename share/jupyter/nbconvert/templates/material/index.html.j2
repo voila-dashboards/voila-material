@@ -1,0 +1,100 @@
+{%- extends 'lab/index.html.j2' -%}
+
+{# this overrides the default behavior of directly starting the kernel and executing the notebook #}
+{% block notebook_execute %}
+{% endblock notebook_execute %}
+
+{%- block html_head_css -%}
+{{ super() }}
+{% if resources.theme == 'dark' %}
+{% set bar_color = '#555454' %}
+{% else %}
+{% set bar_color = '#5cbcaf' %}
+{% endif %}
+{{ resources.include_css("static/materialize.min.css") }}
+
+<style type="text/css">
+  body {
+    background-color: var(--jp-layout-color0);
+    overflow-y: scroll;
+  }
+
+  /* Overwrite default value, workaround for not breaking materialize */
+  .jp-Notebook {
+    padding: 0px;
+  }
+
+  .nav-wrapper {
+    background-color: {{ bar_color }};
+  }
+
+  .brand-logo {
+    height: 90%;
+    width: 100%;
+  }
+
+  .voila-spinner-color1 {
+    fill: {{ bar_color }};
+  }
+</style>
+
+<style>
+a.anchor-link {
+  display: none;
+}
+.highlight  {
+  margin: 0.4em;
+}
+/* we keep the DOM for nbconvert the same as for voila, but hide the status icon */
+#kernel-status-icon {
+  display: none;
+}
+</style>
+
+{%- endblock html_head_css -%}
+
+{%- block body -%}
+{%- block body_header -%}
+  {{ super() }}
+  <header>
+    <div class="navbar-fixed">
+      <nav class="top-nav">
+        <div class="nav-wrapper">
+          <a href="#!" class="brand-logo-container">
+            <object class="brand-logo" type="image/svg+xml" data="{{ resources.include_url("static/voila_logo.svg") }}"></object>
+          </a>
+          <ul class="right">
+            <li><a href="#"><i class="material-icons" id="kernel-status-icon">radio_button_unchecked</i></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+{%- endblock body_header -%}
+
+{%- block body_loop -%}
+          {% if resources.theme == 'dark' %}
+          <div class="jp-Notebook theme-dark">
+          {% else %}
+          <div class="jp-Notebook theme-light">
+          {% endif %}
+            {{ super() }}
+          </div>
+{%- endblock body_loop -%}
+
+{%- block body_footer -%}
+        </div>
+      </div>
+    </div>
+  </main>
+  {{ super() }}
+  {{ resources.include_js("static/materialize.min.js") }}
+</body>
+{%- endblock body_footer -%}
+
+{%- endblock body -%}
