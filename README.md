@@ -1,6 +1,6 @@
 # voila-material
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/voila-dashboards/voila-material/master?urlpath=voila)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/voila-dashboards/voila-material/stable?urlpath=voila)
 
 Material design template for voila
 
