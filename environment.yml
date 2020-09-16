@@ -5,4 +5,4 @@ dependencies:
   - ipywidgets=7.5.1
   - bqplot
   - voila=0.1.21
-  - voila-material=0.3.0
+  - voila-material=0.4.0
