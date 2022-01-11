@@ -89,10 +89,9 @@ setup(
     description="Material design template for voila",
     data_files=data_files,
     include_package_data=True,
-    author='Martin Renou',
-    author_email='martin.renou@gmail.com',
-    install_requires=['voila>=0.2.1'],
-    url='https://github.com/martinRenou/voila-material',
+    author='Voila Development Team',
+    install_requires=['voila>=0.2.1,<0.4.0'],
+    url='https://github.com/voila-dashboards/voila-material',
     keywords=[
         'ipython',
         'jupyter',
