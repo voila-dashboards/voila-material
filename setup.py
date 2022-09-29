@@ -98,7 +98,8 @@ setup(
         'widgets',
         'voila'
     ],
+    packages=[],
     cmdclass={
         'develop': DevelopCmd,
-   },
+    }
 )
