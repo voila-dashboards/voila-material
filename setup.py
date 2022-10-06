@@ -90,7 +90,7 @@ setup(
     data_files=data_files,
     include_package_data=True,
     author='Voila Development Team',
-    install_requires=['voila>=0.2.1,<0.4.0'],
+    install_requires=['voila>=0.2.1,<0.5.0'],
     url='https://github.com/voila-dashboards/voila-material',
     keywords=[
         'ipython',
