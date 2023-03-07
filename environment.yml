@@ -4,4 +4,4 @@ channels:
 dependencies:
   - bqplot
   - voila
-  - voila-material=0.4.2
+  - voila-material=0.4.3
