@@ -85,7 +85,7 @@ for (dirpath, dirnames, filenames) in os.walk('share/jupyter/'):
 
 setup(
     name='voila-material',
-    version="0.4.1",
+    version="0.4.2",
     description="Material design template for voila",
     data_files=data_files,
     include_package_data=True,
