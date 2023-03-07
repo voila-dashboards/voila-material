@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="{{ base_url }}voila/static/materialize.min.css">
+    {{ include_css("static/materialize.min.css") }}
 
     <!-- Base CSS -->
     <style type="text/css">
@@ -18,7 +18,7 @@
         font-family: 'Material Icons';
         font-style: normal;
         font-weight: 400;
-        src: url({{base_url}}voila/static/icons_font.ttf) format('truetype');
+        src: url({{ include_url("static/icons_font.ttf") }}) format('truetype');
       }
 
       .material-icons {
@@ -106,6 +106,6 @@
     {% block body %}
     {% endblock %}
 
-    <script src="{{ base_url }}voila/static/materialize.min.js"></script>
+    {{ include_js("static/materialize.min.js") }}
   </body>
 </html>
