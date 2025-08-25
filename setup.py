@@ -90,6 +90,7 @@ setup(
     data_files=data_files,
     include_package_data=True,
     author='Voila Development Team',
+    license="BSD-3-Clause",
     install_requires=['voila>=0.2.1,<0.6.0'],
     url='https://github.com/voila-dashboards/voila-material',
     keywords=[
